@@ -23,6 +23,15 @@ public class Contact {
     private String type;
     private String description;
     private String accountId;
+    private String address1;
+    private String address2;
+    private String address3;
+    private String city;
+    private String state;
+    private String zip;
+    private double latitude;
+    private double longitude;
+
     private boolean deleted = false;
     private Date createdDate = new Date();
 
@@ -46,22 +55,5 @@ public class Contact {
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("firstName", firstName)
-                .append("lastName", lastName)
-                .append("fullName", fullName)
-                .append("type", type)
-                .append("description", description)
-                .append("accountId", accountId)
-                .append("deleted", deleted)
-                .append("createdDate", createdDate)
-                .append("doctors", doctors)
-                .append("associatedContactMethods", associatedContactMethods)
-                .toString();
     }
 }
