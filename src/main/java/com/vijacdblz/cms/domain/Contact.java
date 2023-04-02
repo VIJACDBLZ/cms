@@ -31,8 +31,8 @@ public class Contact {
     private String zip;
     private double latitude;
     private double longitude;
-
     private boolean deleted = false;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate = new Date();
 
     @ManyToMany(cascade = {CascadeType.ALL})

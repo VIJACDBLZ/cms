@@ -1,5 +1,6 @@
 package com.vijacdblz.cms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,8 +18,9 @@ public class ContactMethod {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="contact_id", nullable=false)
+    @JsonIgnore
     private Contact contact;
-    private String type;
+    private String cmtype;
     private String title;
     private String valueText;
     private boolean deleted = false;

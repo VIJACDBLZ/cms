@@ -26,7 +26,7 @@ public class BootstrapData implements CommandLineRunner {
         clinic.setFullName("Dog Clinic 1");
         clinic.setType("clinic");
         ContactMethod contactMethod2 = new ContactMethod();
-        contactMethod2.setType("email");
+        contactMethod2.setCmtype("email");
         contactMethod2.setTitle("email");
         contactMethod2.setValueText("DogClinic1@gmail.com");
         contactMethod2.setContact(clinic);
@@ -46,7 +46,7 @@ public class BootstrapData implements CommandLineRunner {
         doctor.setAccountId("TEST");
 
         ContactMethod contactMethod = new ContactMethod();
-        contactMethod.setType("email");
+        contactMethod.setCmtype("email");
         contactMethod.setTitle("email");
         contactMethod.setValueText("vijacdblz@gmail.com");
         contactMethod.setContact(doctor);
