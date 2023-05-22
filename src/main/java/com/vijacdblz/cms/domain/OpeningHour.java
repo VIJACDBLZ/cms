@@ -4,30 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name="contact_method")
-public class ContactMethod {
-
-
+@Table(name="opening_hour")
+public class OpeningHour {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    private long id;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="contact_id", nullable=false)
     @JsonIgnore
     private Contact contact;
-    private String type;
-    private String title;
-    private String valueText;
-    private boolean deleted = false;
-    private Date createdDate = new Date();
-    private String accountId;
-
-
-    
+    private int dayOfWeek;
+    private LocalDate openingTime;
+    private LocalDate closingTime;
 
 }

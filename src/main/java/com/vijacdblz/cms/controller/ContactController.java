@@ -1,17 +1,12 @@
 package com.vijacdblz.cms.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import com.vijacdblz.cms.domain.Type;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.vijacdblz.cms.domain.Contact;
 import com.vijacdblz.cms.service.ContactService;
@@ -29,12 +24,12 @@ public class ContactController {
 
     @GetMapping("/api/v1/clinic")
     public ResponseEntity<List<Contact>> getClinicListing(@RequestParam int page , @RequestParam(required = false, defaultValue = "20") int size ) {
-        return ResponseEntity.ok(new ArrayList<>((Collection<? extends Contact>) contactService.findByType("clinic", PageRequest.of(page, size))));
+        return ResponseEntity.ok(new ArrayList<>((Collection<? extends Contact>) contactService.findByType(Type.CLINIC, PageRequest.of(page, size))));
     }
 
     @GetMapping("/api/v1/doctors")
     public ResponseEntity<List<Contact>> getDoctorsListing(@RequestParam int page , @RequestParam(required = false, defaultValue = "20") int size ) {
-        return ResponseEntity.ok(new ArrayList<>((Collection<? extends Contact>) contactService.findByType("doctor", PageRequest.of(page, size))));
+        return ResponseEntity.ok(new ArrayList<>((Collection<? extends Contact>) contactService.findByType(Type.DOCTOR, PageRequest.of(page, size))));
     }
     
     @GetMapping("/api/v1/contact/{id}")
@@ -48,13 +43,17 @@ public class ContactController {
     }
 
 
-    @GetMapping("/api/v1/contact/{type}/{page}")
-    public List<Contact> getProductsByName(@PathVariable String type,
-                                           @PathVariable int page,
-                                           @RequestParam(required = false, defaultValue = "20") int size) {
-//        return productRepository.findProductsByName(name, Sort.by("id").descending());
+    @GetMapping("/api/v1/contact/search/{type}")
+    public List<Contact> searchContacts(@PathVariable String type,
+                                           @RequestParam(value="test") Map<String, String> requestMap) {
 
-        return contactService.findByType(type, PageRequest.of(page, size));
+        return contactService.findAll(type, requestMap);
+    }
+
+    @PostMapping("/api/v1/contact")
+    public Contact createContact(@RequestBody Contact contact){
+
+        return contactService.save(contact);
     }
 
 }
